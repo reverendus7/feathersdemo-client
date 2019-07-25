@@ -7,13 +7,19 @@ const app = feathers();
 app.configure(feathers.socketio(socket));
 
 export const listenToService = (service, callback) => {
-  // TODO 
+  app.service(service).on("created", callback);
 };
 
 export const loadHospitals = (sort = "createdAt", order = -1) => {
-  // TODO 
+  return app.service("hospitals").find({
+    query: {
+      $sort: {
+        [sort]: order
+      }
+    }
+  });
 };
 
 export const addHospital = data => {
-  // TODO 
+  return app.service("hospitals").create(data);
 };

@@ -7,9 +7,8 @@ import { listenToService, loadHospitals } from "../api";
 export default () => {
   const [hospitals, setHospitals] = useState([]);
 
-  const loadData = (sort, order) => {
-    // TODO
-  };
+  const loadData = (sort, order) =>
+    loadHospitals(sort, order).then(data => setHospitals(data.data));
 
   useEffect(() => {
     listenToService("hospitals", () => {
